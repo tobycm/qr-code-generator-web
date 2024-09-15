@@ -21,10 +21,41 @@
       <textarea id="data-input"></textarea>
       <br />
 
-      <button id="generate-qr-code-button">+ &nbsp;Generate QR Code</button>
-      <div id="qr-code" style="margin-top: 2rem"></div>
+      <details id="options">
+        <summary>⚙️ Options</summary>
+        <label for="size-input">Border size:&nbsp;</label>
+        <input id="size-input" type="number" value="4" />
 
-      <button id="download-qr-code-button" hidden disabled>🖫 &nbsp;Download QR Code as PNG</button>
+        <br />
+
+        <label for="color-input">Squares color:&nbsp;</label>
+        <input id="color-input" type="color" value="#000000" />
+
+        <br />
+
+        <label for="background-color-input">Background color:&nbsp;</label>
+        <input id="background-color-input" type="color" value="#ffffff" />
+
+        <br />
+
+        <label for="ecl-input">Error correction level:&nbsp;</label>
+        <select id="ecl-input">
+          <option value="LOW">Low - 7%</option>
+          <option value="MEDIUM" selected="selected">Medium - 15%</option>
+          <option value="QUARTILE">Quartile - 25%</option>
+          <option value="HIGH">High - 30%</option>
+        </select>
+      </details>
+
+      <br />
+
+      <button id="generate-qr-code-button">+ &nbsp;Generate QR Code</button>
+
+      <div id="result" hidden>
+        <img id="qr-code" style="margin-top: 2rem" />
+
+        <button id="download-qr-code-button" disabled>🖫 &nbsp;Download QR Code as PNG</button>
+      </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

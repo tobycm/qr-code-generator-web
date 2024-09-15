@@ -1,11 +1,20 @@
-import { qrcode } from "@libs/qrcode";
+import { options as QRCodeOptions, qrcode } from "@libs/qrcode";
 
-const generateQrCodeButton = document.getElementById("generate-qr-code-button");
-const downloadQrCodeButton = document.getElementById("download-qr-code-button");
+const generateQrCodeButton = document.getElementById("generate-qr-code-button") as HTMLButtonElement;
+const downloadQrCodeButton = document.getElementById("download-qr-code-button") as HTMLButtonElement;
+
+const qrCodeDataInput = document.getElementById("data-input") as HTMLTextAreaElement;
+
+const sizeInput = document.getElementById("size-input") as HTMLInputElement;
+const colorInput = document.getElementById("color-input") as HTMLInputElement;
+const backgroundColorInput = document.getElementById("background-color-input") as HTMLInputElement;
+const eclInput = document.getElementById("ecl-input") as HTMLInputElement;
+
+const qrCodeImage = document.getElementById("qr-code") as HTMLImageElement;
 
 let pngData: string | undefined = undefined;
 
-downloadQrCodeButton?.addEventListener("click", async () => {
+downloadQrCodeButton.addEventListener("click", async () => {
   const link = document.createElement("a");
 
   // console.log(pngData);
@@ -15,22 +24,29 @@ downloadQrCodeButton?.addEventListener("click", async () => {
   link.click();
 });
 
-generateQrCodeButton?.addEventListener("click", async () => {
-  downloadQrCodeButton?.setAttribute("disabled", "true");
+generateQrCodeButton.addEventListener("click", async () => {
+  downloadQrCodeButton.setAttribute("disabled", "true");
 
-  const qrCodeData = (document.getElementById("data-input") as HTMLTextAreaElement).value;
-  const qrCodeSvg = qrcode(qrCodeData, { output: "svg", ecl: "MEDIUM" });
+  const qrCodeData = qrCodeDataInput.value;
 
-  const qrCodeContainer = document.getElementById("qr-code") as HTMLDivElement;
-  qrCodeContainer.innerHTML = qrCodeSvg;
+  const options: QRCodeOptions = {
+    border: parseInt(sizeInput.value) || 4,
+    dark: colorInput.value,
+    light: backgroundColorInput.value,
+    ecl: eclInput.value as QRCodeOptions["ecl"],
+  };
 
-  downloadQrCodeButton?.removeAttribute("hidden");
+  const qrCodeSvg = qrcode(qrCodeData, { ...options, output: "svg" });
 
-  pngData = await svgToPng(qrCodeSvg);
-  downloadQrCodeButton?.removeAttribute("disabled");
+  qrCodeImage.src = `data:image/svg+xml;base64,${btoa(qrCodeSvg)}`;
+
+  document.getElementById("result")!.removeAttribute("hidden");
+
+  pngData = await svgToPng(qrCodeImage.src);
+  downloadQrCodeButton.removeAttribute("disabled");
 });
 
-async function svgToPng(svg: string): Promise<string> {
+async function svgToPng(svgData: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
@@ -50,6 +66,6 @@ async function svgToPng(svg: string): Promise<string> {
     };
 
     image.onerror = reject;
-    image.src = `data:image/svg+xml;base64,${btoa(svg)}`;
+    image.src = svgData;
   });
 }
