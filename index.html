@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Quick QR Code generator</title>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Quick QR Code generator</h1>
+      <label for="data-input">Enter your QR code data:</label>
+      <br />
+      <textarea id="data-input"></textarea>
+      <br />
+
+      <button id="generate-qr-code-button">▣ Generate QR Code</button>
+      <div id="qr-code" style="margin-top: 2rem"></div>
+
+      <button id="download-qr-code-button" hidden disabled>⬇ Download QR Code</button>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
