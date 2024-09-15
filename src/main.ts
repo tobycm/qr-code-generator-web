@@ -1,3 +1,6 @@
+import "@fontsource/ubuntu/400.css";
+import "@fontsource/ubuntu/500.css";
+import "@fontsource/ubuntu/700.css";
 import { options as QRCodeOptions, qrcode } from "@libs/qrcode";
 
 const generateQrCodeButton = document.getElementById("generate-qr-code-button") as HTMLButtonElement;

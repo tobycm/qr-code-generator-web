@@ -1,11 +1,12 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: Ubuntu, system-ui, sans-serif;
+  line-height: 1;
   font-weight: 400;
+  font-size: x-large;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #1e1e1e;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,12 +27,20 @@ body {
   text-align: center;
 }
 
+button {
+  font-size: x-large;
+}
+
 #data-input {
   width: 18rem;
   min-height: 4rem;
-  margin: 1rem auto;
+  margin-top: 1rem;
 }
 
-#options input {
-  margin: 0 0 1rem 0;
+#options {
+  margin: 1rem 0 2rem 0;
+}
+
+#options * {
+  margin-top: 1rem;
 }

@@ -15,11 +15,10 @@
   <body>
     <div id="app">
       <img src="/favicon.svg" alt="QR Code Generator" style="height: 10vh" />
-      <h1>Quick QR Code generator</h1>
+      <h1 style="margin-bottom: 2.5rem">Quick QR Code generator</h1>
       <label for="data-input">Enter your QR code data:</label>
       <br />
       <textarea id="data-input"></textarea>
-      <br />
 
       <details id="options">
         <summary>⚙️ Options</summary>
@@ -47,14 +46,12 @@
         </select>
       </details>
 
-      <br />
-
       <button id="generate-qr-code-button">+ &nbsp;Generate QR Code</button>
 
-      <div id="result" hidden>
-        <img id="qr-code" style="margin-top: 2rem" />
+      <div id="result" hidden style="margin-top: 2rem">
+        <img id="qr-code" />
 
-        <button id="download-qr-code-button" disabled>🖫 &nbsp;Download QR Code as PNG</button>
+        <button id="download-qr-code-button" disabled style="margin-top: 2rem">🖫 &nbsp;Download QR Code as PNG</button>
       </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
