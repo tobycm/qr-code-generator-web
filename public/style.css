@@ -4,10 +4,6 @@
   font-weight: 400;
   font-size: x-large;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #1e1e1e;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -28,6 +24,8 @@ body {
 
 button {
   font-size: x-large;
+  border: none;
+  cursor: pointer;
 }
 
 #data-input {
@@ -43,4 +41,12 @@ button {
 
 #options * {
   margin-top: 1rem;
+}
+
+input {
+  border: none;
+}
+
+#themeButton {
+  font-size: 2rem;
 }

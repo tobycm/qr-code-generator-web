@@ -10,18 +10,30 @@
 
     <link rel="stylesheet" href="style.css" />
 
+    <link rel="stylesheet" id="theme" href="/themes/light.css" />
+    <link rel="preload" href="/themes/dark.css" as="style" />
+
+    <script type="module" async src="/src/theme.ts"></script>
+
     <title>Quick QR Code generator</title>
   </head>
   <body>
     <div id="app">
       <img src="/favicon.svg" alt="QR Code Generator" style="height: 10vh" />
+
       <h1 style="margin-bottom: 2.5rem">Quick QR Code generator</h1>
+
       <label for="data-input">Enter your QR code data:</label>
       <br />
       <textarea id="data-input"></textarea>
 
       <details id="options">
         <summary>⚙️ Options</summary>
+
+        <div>
+          <button id="themeButton">🔆</button>
+        </div>
+
         <label for="size-input">Border size:&nbsp;</label>
         <input id="size-input" type="number" value="4" />
 
@@ -54,6 +66,7 @@
         <button id="download-qr-code-button" disabled style="margin-top: 2rem">🖫 &nbsp;Download QR Code as PNG</button>
       </div>
     </div>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
