@@ -72,3 +72,37 @@ async function svgToPng(svgData: string): Promise<string> {
     image.src = svgData;
   });
 }
+
+async function handleUrlParams() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const data = urlParams.get("data");
+  if (data) {
+    qrCodeDataInput.value = data;
+  }
+
+  const size = urlParams.get("size");
+  if (size) {
+    sizeInput.value = size;
+  }
+
+  const color = urlParams.get("color");
+  if (color) {
+    colorInput.value = color;
+  }
+
+  const backgroundColor = urlParams.get("backgroundColor");
+  if (backgroundColor) {
+    backgroundColorInput.value = backgroundColor;
+  }
+
+  const ecl = urlParams.get("ecl");
+  if (ecl) {
+    eclInput.value = ecl;
+  }
+
+  if (data) {
+    generateQrCodeButton.click();
+  }
+}
+
+handleUrlParams();
