@@ -6,23 +6,36 @@ import { options as QRCodeOptions, qrcode } from "@libs/qrcode";
 const generateQrCodeButton = document.getElementById("generate-qr-code-button") as HTMLButtonElement;
 const downloadQrCodeButton = document.getElementById("download-qr-code-button") as HTMLButtonElement;
 
+function registerSaveToUrlParam(key: string, input: HTMLInputElement | HTMLTextAreaElement) {
+  input.addEventListener("input", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set(key, input.value);
+    window.history.replaceState({}, "", `${window.location.pathname}?${urlParams.toString()}`);
+  });
+}
+
 const qrCodeDataInput = document.getElementById("data-input") as HTMLTextAreaElement;
+registerSaveToUrlParam("data", qrCodeDataInput);
 
 const sizeInput = document.getElementById("size-input") as HTMLInputElement;
+registerSaveToUrlParam("size", sizeInput);
 const colorInput = document.getElementById("color-input") as HTMLInputElement;
+registerSaveToUrlParam("color", colorInput);
+
 const backgroundColorInput = document.getElementById("background-color-input") as HTMLInputElement;
+registerSaveToUrlParam("backgroundColor", backgroundColorInput);
+
 const eclInput = document.getElementById("ecl-input") as HTMLInputElement;
+registerSaveToUrlParam("ecl", eclInput);
+
+const pngScaleInput = document.getElementById("png-download-scale") as HTMLSelectElement;
 
 const qrCodeImage = document.getElementById("qr-code") as HTMLImageElement;
-
-let pngData: string | undefined = undefined;
 
 downloadQrCodeButton.addEventListener("click", async () => {
   const link = document.createElement("a");
 
-  // console.log(pngData);
-
-  link.href = pngData!;
+  link.href = await downloadPng(qrCodeImage.src, { scale: parseInt(pngScaleInput.value) });
   link.download = "qr-code.png";
   link.click();
 });
@@ -45,25 +58,23 @@ generateQrCodeButton.addEventListener("click", async () => {
 
   document.getElementById("result")!.removeAttribute("hidden");
 
-  pngData = await svgToPng(qrCodeImage.src);
   downloadQrCodeButton.removeAttribute("disabled");
 });
 
-async function svgToPng(svgData: string): Promise<string> {
+interface SvgToPngOptions {
+  scale?: number;
+}
+
+async function downloadPng(svgData: string, { scale }: SvgToPngOptions = {}): Promise<string> {
   return new Promise((resolve, reject) => {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
     const image = new Image();
 
     image.onload = () => {
-      if (!image.width || !image.height) {
-        image.width = 512;
-        image.height = 512;
-      }
-
-      canvas.width = image.width;
-      canvas.height = image.height;
-      context?.drawImage(image, 0, 0, 512, 512);
+      canvas.width = image.width * (scale || 1);
+      canvas.height = image.height * (scale || 1);
+      context?.drawImage(image, 0, 0);
 
       resolve(canvas.toDataURL("image/png"));
     };
