@@ -74,7 +74,7 @@ async function downloadPng(svgData: string, { scale }: SvgToPngOptions = {}): Pr
     image.onload = () => {
       canvas.width = image.width * (scale || 1);
       canvas.height = image.height * (scale || 1);
-      context?.drawImage(image, 0, 0);
+      context?.drawImage(image, 0, 0, canvas.width, canvas.height);
 
       resolve(canvas.toDataURL("image/png"));
     };
