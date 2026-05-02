@@ -12,8 +12,6 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
 
   background-color: #1e1e1e;
 }
@@ -24,8 +22,14 @@ body {
 
 #app {
   max-width: 1280px;
-  margin: 2rem auto;
-  text-align: center;
+  margin: 2rem 2rem;
+}
+
+#header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
 }
 
 button {
@@ -55,4 +59,8 @@ input {
 
 #themeButton {
   font-size: 2rem;
+}
+
+#qr-code {
+  height: 12rem;
 }

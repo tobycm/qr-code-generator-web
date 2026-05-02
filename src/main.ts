@@ -14,19 +14,30 @@ function registerSaveToUrlParam(key: string, input: HTMLInputElement | HTMLTextA
   });
 }
 
+function generateOnInput(input: HTMLInputElement | HTMLTextAreaElement) {
+  input.addEventListener("input", () => {
+    generateQrCodeButton.click();
+  });
+}
+
 const qrCodeDataInput = document.getElementById("data-input") as HTMLTextAreaElement;
 registerSaveToUrlParam("data", qrCodeDataInput);
+generateOnInput(qrCodeDataInput);
 
 const sizeInput = document.getElementById("size-input") as HTMLInputElement;
 registerSaveToUrlParam("size", sizeInput);
+generateOnInput(sizeInput);
 const colorInput = document.getElementById("color-input") as HTMLInputElement;
 registerSaveToUrlParam("color", colorInput);
+generateOnInput(colorInput);
 
 const backgroundColorInput = document.getElementById("background-color-input") as HTMLInputElement;
 registerSaveToUrlParam("backgroundColor", backgroundColorInput);
+generateOnInput(backgroundColorInput);
 
-const eclInput = document.getElementById("ecl-input") as HTMLInputElement;
-registerSaveToUrlParam("ecl", eclInput);
+const eccInput = document.getElementById("ecc-input") as HTMLInputElement;
+registerSaveToUrlParam("ecc", eccInput);
+generateOnInput(eccInput);
 
 const pngScaleInput = document.getElementById("png-download-scale") as HTMLSelectElement;
 
@@ -49,7 +60,7 @@ generateQrCodeButton.addEventListener("click", async () => {
     border: parseInt(sizeInput.value) || 4,
     dark: colorInput.value,
     light: backgroundColorInput.value,
-    ecl: eclInput.value as QRCodeOptions["ecl"],
+    ecl: eccInput.value as QRCodeOptions["ecl"],
   };
 
   const qrCodeSvg = qrcode(qrCodeData, { ...options, output: "svg" });
@@ -106,9 +117,9 @@ async function handleUrlParams() {
     backgroundColorInput.value = backgroundColor;
   }
 
-  const ecl = urlParams.get("ecl");
-  if (ecl) {
-    eclInput.value = ecl;
+  const ecc = urlParams.get("ecc");
+  if (ecc) {
+    eccInput.value = ecc;
   }
 
   if (data) {

@@ -28,11 +28,12 @@
 
 <body>
   <div id="app">
-    <img src="/favicon.svg" alt="QR Code Generator" style="height: 10vh" />
+    <div id="header">
+      <img src="/favicon.svg" alt="QR Code Generator" style="height: 3rem" />
+      <h1>Quick QR Code generator</h1>
+    </div>
 
-    <h1 style="margin-bottom: 2.5rem">Quick QR Code generator</h1>
-
-    <label for="data-input">Enter your QR code data:</label>
+    <label for="data-input">QR code data:</label>
     <br />
     <textarea id="data-input"></textarea>
 
@@ -58,8 +59,8 @@
 
       <br />
 
-      <label for="ecl-input">Error correction level:&nbsp;</label>
-      <select id="ecl-input">
+      <label for="ecc-input">Error correction level:&nbsp;</label>
+      <select id="ecc-input">
         <option value="LOW">Low - 7%</option>
         <option value="MEDIUM" selected="selected">Medium - 15%</option>
         <option value="QUARTILE">Quartile - 25%</option>
@@ -85,7 +86,7 @@
           <option value="32">32x</option>
         </select>
       </div>
-      <button id="download-qr-code-button" disabled style="margin-top: 1rem">🖫 &nbsp;Download QR Code as PNG</button>
+      <button id="download-qr-code-button" disabled style="margin-top: 1rem">🖫 &nbsp;Download PNG</button>
     </div>
   </div>
 
